@@ -1,20 +1,42 @@
 package main
 
-import "github.com/gin-gonic/gin"
-
-func GoTest(c *gin.Context)  {
-	c.JSON(200, gin.H{
-		"code": 2000,
-		"message": "Hello Go!",
-	})
-}
+import (
+	"encoding/gob"
+	"fmt"
+	"github.com/spf13/viper"
+	"golang-online-judge/internal/settings"
+	"golang-online-judge/internal/utils/logs"
+	"time"
+)
 
 func main() {
-	engine  := gin.Default()
-	router := engine.Group("test")
-	router.GET("hello", GoTest)
-	err := engine.Run("0.0.0.0:8080")
+	gob.Register(time.Time{})
+	var err error
+	//初始化viper
+	err = settings.InitViper()
 	if err != nil {
-		println(err)
+		fmt.Println("配置文件加载出错！", err)
+		return
+	}
+	var log = logs.GetLogger()
+
+	//初始化数据库（mysql）
+	err = settings.InitDatabase()
+	if err != nil {
+		log.Errorln(err)
+		return
+	}
+
+	//初始化gin引擎
+	engine, err := settings.InitGinEngine()
+	if err != nil {
+		log.Errorln(err)
+		return
+	}
+	//开始运行
+	err = engine.Run(fmt.Sprintf("%s:%s", viper.GetString("system.SysIP"), viper.GetString("system.SysPort")))
+	if err != nil {
+		log.Errorln(err)
+		return
 	}
 }
