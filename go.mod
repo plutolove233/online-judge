@@ -1,4 +1,4 @@
-module onlineCodeJudge
+module golang-online-judge
 
 go 1.18
 
