@@ -99,6 +99,11 @@ func (obj *_ProblemsMgr) WithTestNum(testNum int) Option {
 	return optionFunc(func(o *options) { o.query["TestNum"] = testNum })
 }
 
+// WithStatus Status获取 问题测试是否上传
+func (obj *_ProblemsMgr) WithStatus(status bool) Option {
+	return optionFunc(func(o *options) { o.query["Status"] = status })
+}
+
 // WithCreateTime CreateTime获取 创建时间
 func (obj *_ProblemsMgr) WithCreateTime(createTime time.Time) Option {
 	return optionFunc(func(o *options) { o.query["CreateTime"] = createTime })
@@ -261,6 +266,20 @@ func (obj *_ProblemsMgr) GetFromTestNum(testNum int) (results []*Problems, err e
 // GetBatchFromTestNum 批量查找 测试个数
 func (obj *_ProblemsMgr) GetBatchFromTestNum(testNums []int) (results []*Problems, err error) {
 	err = obj.DB.WithContext(obj.ctx).Model(Problems{}).Where("`TestNum` IN (?)", testNums).Find(&results).Error
+
+	return
+}
+
+// GetFromStatus 通过Status获取内容 问题测试是否上传
+func (obj *_ProblemsMgr) GetFromStatus(status bool) (results []*Problems, err error) {
+	err = obj.DB.WithContext(obj.ctx).Model(Problems{}).Where("`Status` = ?", status).Find(&results).Error
+
+	return
+}
+
+// GetBatchFromStatus 批量查找 问题测试是否上传
+func (obj *_ProblemsMgr) GetBatchFromStatus(statuss []bool) (results []*Problems, err error) {
+	err = obj.DB.WithContext(obj.ctx).Model(Problems{}).Where("`Status` IN (?)", statuss).Find(&results).Error
 
 	return
 }

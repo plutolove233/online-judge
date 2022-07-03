@@ -15,6 +15,7 @@ type Problems struct {
 	TimeLimit    int       `gorm:"column:TimeLimit;type:int" json:"timeLimit"`                                  // 最大运行时间
 	MemoryLimit  int       `gorm:"column:MemoryLimit;type:int" json:"memoryLimit"`                              // 最大运行内存
 	TestNum      int       `gorm:"column:TestNum;type:int" json:"testNum"`                                      // 测试个数
+	Status       bool      `gorm:"column:Status;type:tinyint(1);default:0" json:"status"`                       // 问题测试是否上传
 	CreateTime   time.Time `gorm:"column:CreateTime;type:datetime;default:CURRENT_TIMESTAMP" json:"createTime"` // 创建时间
 	IsDeleted    bool      `gorm:"column:IsDeleted;type:tinyint(1);default:0" json:"isDeleted"`                 // 是否删除
 }
@@ -35,6 +36,7 @@ var ProblemsColumns = struct {
 	TimeLimit    string
 	MemoryLimit  string
 	TestNum      string
+	Status       string
 	CreateTime   string
 	IsDeleted    string
 }{
@@ -47,6 +49,7 @@ var ProblemsColumns = struct {
 	TimeLimit:    "TimeLimit",
 	MemoryLimit:  "MemoryLimit",
 	TestNum:      "TestNum",
+	Status:       "Status",
 	CreateTime:   "CreateTime",
 	IsDeleted:    "IsDeleted",
 }

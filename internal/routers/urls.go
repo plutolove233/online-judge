@@ -4,6 +4,7 @@ import (
 	//"api.openfileplatform.com/internal/routers/api1_0"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	"golang-online-judge/internal/routers/api1_0"
 )
 
 func InitStaticRouterGroup(engine *gin.Engine) {
@@ -17,5 +18,5 @@ func InitStaticRouterGroup(engine *gin.Engine) {
 }
 
 func InitRouter(engine *gin.Engine) {
-	//api1_0.InitAPI1_0Router(engine)
+	api1_0.InitAPI1_0Router(engine)
 }
