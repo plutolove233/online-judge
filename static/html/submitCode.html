@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/submitCode.css" rel="stylesheet" type="text/css" />
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../js/submitCode.js"></script>
+    <title>online judge</title>
+</head>
+
+<body class="backgroundFrame">
+    
+    <div id="main">
+        <div id="problem-description-Area">
+            <h1 id="problem-title">
+                <!-- A+B problem -->
+            </h1>
+            <h2>题目描述</h2>
+            <hr/>
+            <div id="problem-description">
+                <!-- <p>Time Limit:1000ms</p>
+                <p>Memory Limit: 256Mb</p>
+                <p>输入A，B
+                    输出A+B
+                </p> -->
+            </div>
+
+            <h2>输入输出格式描述</h2>
+            <hr />
+            <h4>输入描述：</h4>
+            <div id="input-description">
+                <!-- <p>输入包含两个整数A,B，用一个空格分隔</p> -->
+            </div>
+            <h4>输出描述：</h4>
+            <div id="output-description">
+                <!-- <p>输出一个整数，表示A+B</p> -->
+            </div>
+
+            <h2>输入输出样例</h2>
+            <hr />
+            <div>
+                <div style="float: left;">
+                    <h4>输入样例</h4>
+                    <div id="input-example">
+                        <!-- <p>5 8</p> -->
+                    </div>
+                </div>
+                <div style="float: right;">
+                    <h4>输出样例</h4>
+                    <div id="output-example">
+                        <!-- <p>13</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="submitArea">
+            <div id="leftBox"><textarea title="行号" wrap="off" cols="2" id="leftNum" disabled></textarea></div>
+            <div>
+                <textarea title="代码区" name="codeArea" id="codeArea" rows="20" cols="50" spellcheck="false"
+                    onkeyup="keyUp()" onkeydown="onKeyPress()"
+                    onscroll="document.getElementById('leftNum').scrollTop = this.scrollTop;"></textarea>
+            </div>
+            <br />
+            <button type="button" class="submitButton" onclick="submitCode()">提交评测</button>
+        </div>
+    </div>
+    <br />
+
+</body>
+
+<script>
+    function onKeyPress() {
+        if (event.code !== "Tab") return true;
+
+        event.preventDefault();
+
+        let start = this.selectionStart;
+        let end = this.selectionEnd;
+        if (start === end) {
+            document.execCommand('insertText', false, "\t");
+        } else {
+            let strBefore = this.value.slice(0, start);
+            let curLineStart = strBefore.includes('\n') ? strBefore.lastIndexOf('\n') + 1 : 0;
+            let strBetween = this.value.slice(curLineStart, end + 1);
+            let newStr = "  " + strBetween.replace(/\n/g, '\n  ');
+            let lineBreakCount = strBetween.split('\n').length;
+            let newStart = start + 2;
+            let newEnd = end + (lineBreakCount + 1) * 2;
+
+            this.setSelectionRange(curLineStart, end);
+            document.execCommand("insertText", false, newStr);
+            this.setSelectionRange(newStart, newEnd);
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,131 @@
+.backgroundFrame {
+    background-color: rgb(239, 239, 239);
+}
+
+
+#leftNum {
+    height: 900px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    border: 0;
+    background: rgb(220, 220, 220);
+    color: #999;
+    line-height: 24px;
+    font-size: 14px;
+    padding: 10px 4px;
+    text-align: right;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+#leftBox {
+    background: rgb(220, 220, 220);
+    width: 35px;
+    height: 900px;
+    text-align: left;
+    float: left;
+}
+
+#problem-title {
+    background-color: rgb(64, 66, 68);
+    color: rgb(255, 255, 255);
+    width: auto;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+}
+
+#main {
+    width: auto;
+    height: 1000px;
+    border-width: 5px;
+}
+
+#submitArea {
+    float: left;
+    width: 900px;
+    height: 900px;
+    box-shadow: 2px 2px 1px 1px rgb(94, 92, 92);
+}
+
+#codeArea {
+    position: relative;
+    border: 1px solid #eaeaea;
+    outline: none;
+    width: 860px;
+    height: 900px;
+    resize: none;
+    background: rgb(255, 255, 255);
+    line-height: 24px;
+    font-size: 14px;
+    float: left;
+    padding: 10px 8px;
+    color: rgb(0, 0, 0);
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.submitButton {
+    float: left;
+    background-color: rgb(0, 123, 255);
+    border-radius: 5px;
+    border-width: 0px;
+    text-align: center;
+    font-weight: bold;
+    height: 40px;
+    width: 200px;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: rgb(0, 105, 217);
+}
+
+.submitButton:active {
+    opacity: 0.5;
+}
+
+#problem-description-Area {
+    overflow: scroll;
+    float: left;
+    width: 980px;
+    height: 1000px;
+}
+
+#problem-description {
+    background-color: rgb(248, 249, 250);
+    padding: 10px;
+}
+
+#input-description {
+    background-color: rgb(248, 249, 250);
+    padding: 10px;
+    border-left: 2px solid rgb(52, 152, 219);
+}
+
+#output-description {
+    background-color: rgb(248, 249, 250);
+    padding: 10px;
+    border-left: 2px solid rgb(52, 152, 219);
+}
+
+#input-example {
+    float: left;
+    width: 400px;
+    height: auto;
+    background-color: rgb(248, 249, 250);
+    padding: 5px;
+    border-left: 2px solid rgb(52, 152, 219);
+}
+
+#output-example {
+    float: right;
+    width: 400px;
+    height: auto;
+    background-color: rgb(248, 249, 250);
+    padding: 5px;
+    border-left: 2px solid rgb(52, 152, 219);
+}

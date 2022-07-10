@@ -1,0 +1,36 @@
+#code-content {
+    position: relative;
+    border: 1px solid #eaeaea;
+    outline: none;
+    width: 800px;
+    height: 100%;
+    resize: none;
+    font-size: 16px;
+    float: left; 
+}
+
+#problem-header {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: auto;
+    font-weight: bold;
+    height: auto;
+    
+}
+
+.author {
+    font-size: 22px;
+    color: rgb(39, 174, 96);
+}
+.problemTitle {
+    font-size: 22px;
+    color: rgb(0, 123, 255);
+    width: auto;
+}
+
+.main {
+    padding-left: 300px;
+    padding-top: 60px;
+    width: 800px;
+    height: auto;
+}
