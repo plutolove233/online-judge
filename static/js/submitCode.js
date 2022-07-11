@@ -35,8 +35,17 @@ function submitCode() {
     if (!flag) {
         alert("没有在主函数内添加return 0");
     } else {
+        // ajax
+        SubmitRecordID="100110011001100"
         console.log(strArr.join("\n"));
+        $(location).attr("href", "../html/submit-result.html?SubmitRecordID="+SubmitRecordID);
     }
+}
+
+function gotoSubmitRecord(){
+    let problemID = $.getUrlParam("ProblemID");
+    console.log(problemID);
+    $(location).attr("href", "../html/submit-record.html?ProblemID="+problemID);
 }
 
 $(function () {

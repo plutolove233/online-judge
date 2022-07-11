@@ -1,8 +1,20 @@
 $(function () {
-    pro_title = "A+B problem"
-    who = "shyhao"
+    submitID = "20301";
+    pro_title = "A+B problem";
+    who = "shyhao";
     submitStatus = "AC";
     code = "#include <cstdio>;\nusing namespace std;\nint main(){\n\treturn 0;\n}";
+    
+    var d = $("<div></div>", {
+    });
+    var preID = $("<span></span>", {
+        text: "提交ID：",
+    });
+    var sumit_id = $("<span></span>",{
+        text: submitID,
+    });
+    d.append(preID, sumit_id);
+
     var d1 = $("<div></div>")
     var t = $("<span></span>", {
         text: pro_title,
@@ -32,7 +44,7 @@ $(function () {
     })
     statusC.addClass("author");
     d3.append(prefixStatus, statusC);
-    $("#problem-header").append(d1, d2, d3);
+    $("#problem-header").append(d, d1, d2, d3);
 
     
     console.log(code);

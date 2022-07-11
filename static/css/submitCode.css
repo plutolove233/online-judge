@@ -4,7 +4,7 @@
 
 
 #leftNum {
-    height: 900px;
+    height: 850px;
     width: 100%;
     resize: none;
     outline: none;
@@ -24,7 +24,7 @@
 #leftBox {
     background: rgb(220, 220, 220);
     width: 35px;
-    height: 900px;
+    height: 850px;
     text-align: left;
     float: left;
 }
@@ -40,14 +40,14 @@
 
 #main {
     width: auto;
-    height: 1000px;
+    height: auto;
     border-width: 5px;
 }
 
 #submitArea {
     float: left;
     width: 900px;
-    height: 900px;
+    height: 850px;
     box-shadow: 2px 2px 1px 1px rgb(94, 92, 92);
 }
 
@@ -56,7 +56,7 @@
     border: 1px solid #eaeaea;
     outline: none;
     width: 860px;
-    height: 900px;
+    height: 850px;
     resize: none;
     background: rgb(255, 255, 255);
     line-height: 24px;
@@ -92,7 +92,7 @@
     overflow: scroll;
     float: left;
     width: 980px;
-    height: 1000px;
+    height: 900px;
 }
 
 #problem-description {
@@ -128,4 +128,21 @@
     background-color: rgb(248, 249, 250);
     padding: 5px;
     border-left: 2px solid rgb(52, 152, 219);
+}
+
+
+.submit-record-button {
+    float: right;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(221, 81, 76);
+    color:white;
+    border-radius: 5px;
+    border-width: 0px;
+}
+.submit-record-button:hover{
+    background-color: rgb(215, 52, 46);
+}
+.submit-record-button:active {
+    opacity: 0.5;
 }
