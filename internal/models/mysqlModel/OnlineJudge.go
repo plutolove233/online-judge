@@ -14,7 +14,7 @@ type Problems struct {
 	OutputLayout string    `gorm:"column:OutputLayout;type:varchar(1000)" json:"outputLayout"`                  // 输出格式描述
 	TimeLimit    int       `gorm:"column:TimeLimit;type:int" json:"timeLimit"`                                  // 最大运行时间
 	MemoryLimit  int       `gorm:"column:MemoryLimit;type:int" json:"memoryLimit"`                              // 最大运行内存
-	TestNum      int       `gorm:"column:TestNum;type:int" json:"testNum"`                                      // 测试个数
+	TestNum      int       `gorm:"column:TestNum;type:int;default:0" json:"testNum"`                            // 测试个数
 	Status       bool      `gorm:"column:Status;type:tinyint(1);default:0" json:"status"`                       // 问题测试是否上传
 	CreateTime   time.Time `gorm:"column:CreateTime;type:datetime;default:CURRENT_TIMESTAMP" json:"createTime"` // 创建时间
 	IsDeleted    bool      `gorm:"column:IsDeleted;type:tinyint(1);default:0" json:"isDeleted"`                 // 是否删除
@@ -52,6 +52,41 @@ var ProblemsColumns = struct {
 	Status:       "Status",
 	CreateTime:   "CreateTime",
 	IsDeleted:    "IsDeleted",
+}
+
+// Submits [...]
+type Submits struct {
+	AutoID       int64     `gorm:"primaryKey;column:AutoID;type:bigint;not null" json:"-"` // 自增主键
+	SubmitID     string    `gorm:"column:SubmitID;type:varchar(20)" json:"submitId"`
+	UserID       string    `gorm:"column:UserID;type:varchar(20)" json:"userId"`             // 用户id
+	ProblemID    string    `gorm:"column:ProblemID;type:varchar(20)" json:"problemId"`       // 问题id
+	SubmitStatus string    `gorm:"column:SubmitStatus;type:varchar(10)" json:"submitStatus"` // 提交状态
+	IsDeleted    bool      `gorm:"column:IsDeleted;type:tinyint(1)" json:"isDeleted"`
+	CreateTime   time.Time `gorm:"column:CreateTime;type:datetime;default:CURRENT_TIMESTAMP" json:"createTime"` // 创建时间
+}
+
+// TableName get sql table name.获取数据库表名
+func (m *Submits) TableName() string {
+	return "submits"
+}
+
+// SubmitsColumns get sql column name.获取数据库列名
+var SubmitsColumns = struct {
+	AutoID       string
+	SubmitID     string
+	UserID       string
+	ProblemID    string
+	SubmitStatus string
+	IsDeleted    string
+	CreateTime   string
+}{
+	AutoID:       "AutoID",
+	SubmitID:     "SubmitID",
+	UserID:       "UserID",
+	ProblemID:    "ProblemID",
+	SubmitStatus: "SubmitStatus",
+	IsDeleted:    "IsDeleted",
+	CreateTime:   "CreateTime",
 }
 
 // Users [...]

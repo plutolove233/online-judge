@@ -48,11 +48,10 @@ func (m *Problems) Delete() error {
 	}).Error
 }
 
-func (m *Problems) GetAll(id string) ([]Problems, error) {
+func (m *Problems) GetAll() ([]Problems, error) {
 	mysqlManager := database.GetMysqlClient()
 	problems := []Problems{}
-	return problems, mysqlManager.Model(&m).Where(map[string]interface{}{
-		"ProblemID": id,
+	return problems, mysqlManager.Model(&m).Where(m).Where(map[string]interface{}{
 		"IsDeleted": 0,
 	}).Find(&problems).Error
 }

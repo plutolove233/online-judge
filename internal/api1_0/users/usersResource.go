@@ -61,19 +61,3 @@ func (u *UserApi) Register(c *gin.Context) {
 	responseParser.JsonOK(c, "用户注册成功", userService)
 	return
 }
-
-type SolveProblemsRequestParser struct {
-	ProblemID   string `json:"ProblemID" form:"ProblemID" binding:"required"`
-	CodeContext string `json:"CodeContext" form:"CodeContext" binding:"required"`
-}
-
-func (u *UserApi) SolveProblems(c *gin.Context) {
-	var parser SolveProblemsRequestParser
-	var err error
-	err = c.ShouldBind(&parser)
-	if err != nil {
-		responseParser.JsonParameterIllegal(c, "获取请求参数失败", err)
-		return
-	}
-
-}

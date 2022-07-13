@@ -2,7 +2,7 @@ $(function(){
     // let SubmitStatus = "AC";
     // let message = "通过";
     let SubmitStatus = "WA";
-    let message = "答案错误";
+    let Message = "答案错误";
     if (SubmitStatus==="AC"){
         submit_res = $("<p></p>", {
             text: SubmitStatus,
@@ -16,5 +16,5 @@ $(function(){
         })
     }
     $("#res").append(submit_res);
-    $("#message").append(message);
+    $("#message").append(Message);
 })

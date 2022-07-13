@@ -72,7 +72,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
 	if err1 = cmd.Run(); err1 != nil {
-		runner.Status = 2 // 返回编译错误信息
+		runner.Status = 5 // 返回编译错误信息
 		runner.Message = fmt.Sprintf("%s:%s", err1.Error(), stderr.String())
 		return
 	}
@@ -81,7 +81,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 	MLE := make(chan int) // 超内存的channel
 	AC := make(chan int)  // 答案正确的channel
 	RE := make(chan int)  // 运行时错误的channel
-	TLE := make(chan int)
+	TLE := make(chan int) // 超时间的channel
 
 	for i := 1; i <= problem.TestNum; i++ {
 		inputPath := fmt.Sprintf("./problems/%s/%d.in", problemID, i)
@@ -164,13 +164,17 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 	select {
 	case <-WA:
 		//msg = "答案错误"
+		runner.Status = 2
 		runner.Message = fmt.Sprintf("Wrong Answer,passed:%d", passCount)
 	case <-TLE:
+		runner.Status = 3
 		runner.Message = "time limit error"
 	case <-MLE:
 		//msg = "运行超内存"
-		runner.Message = fmt.Sprintf("memory limit error, allocate %d", allocate)
+		runner.Status = 4
+		runner.Message = fmt.Sprintf("memory limit error, allocate %dKb", allocate)
 	case <-RE:
+		runner.Status = 6
 		runner.Message = message
 	case <-AC:
 		runner.Status = 1

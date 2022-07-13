@@ -12,9 +12,9 @@ import (
 	"os"
 )
 
-func SaveCodeContext(code string, userID string, problemID string) (string, error) {
+func SaveCodeContext(code string, userID string, submitID string) (string, error) {
 	dirName := "./codeArea/" + userID
-	path := fmt.Sprintf("%s/%s.c", dirName, problemID)
+	path := fmt.Sprintf("%s/%s.cpp", dirName, submitID)
 	err := os.Mkdir(dirName, 0777)
 	if err != nil {
 		return "", err

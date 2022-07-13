@@ -7,7 +7,11 @@
 */
 package problems
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"golang-online-judge/internal/api1_0/problems"
+	"golang-online-judge/internal/middlewares"
+)
 
 var (
 	api *gin.RouterGroup
@@ -15,5 +19,9 @@ var (
 
 func InitProblemsRouterGroup(engine *gin.RouterGroup) {
 	api = engine.Group("problems")
-
+	problemApi := problems.ProblemApi{}
+	api.Use(middlewares.TokenRequire())
+	api.POST("createProblem", middlewares.AuthenticationMiddleware(), problemApi.UploadNewProblem)
+	api.POST("uploadTestCases", middlewares.AuthenticationMiddleware(), problemApi.UploadProblemTestCases)
+	api.GET("getProblemList", problemApi.GetProblemList)
 }

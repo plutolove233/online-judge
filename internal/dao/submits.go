@@ -1,7 +1,7 @@
 // Package dao
 /*
 @Coding : utf-8
-@time : 2022/7/3 11:04
+@time : 2022/7/12 16:49
 @Author : yizhigopher
 @Software : GoLand
 */
@@ -12,46 +12,46 @@ import (
 	"golang-online-judge/internal/models/mysqlModel"
 )
 
-type Users struct {
-	mysqlModel.Users
+type Submits struct {
+	mysqlModel.Submits
 }
 
-func (m *Users) Get() error {
+func (s *Submits) Get() error {
 	mysqlManager := database.GetMysqlClient()
 	return mysqlManager.Where(map[string]interface{}{
 		"IsDeleted": 0,
-	}).Where(m).Take(m).Error
+	}).Where(s).Take(s).Error
 }
 
-func (m *Users) Add() error {
+func (s *Submits) Add() error {
 	mysqlManager := database.GetMysqlClient()
-	return mysqlManager.Create(&m).Error
+	return mysqlManager.Create(&s).Error
 }
 
-func (m *Users) Update(args map[string]interface{}) error {
+func (s *Submits) Update(args map[string]interface{}) error {
 	mysqlManager := database.GetMysqlClient()
-	err := m.Get()
+	err := s.Get()
 	if err != nil {
 		return err
 	}
-	return mysqlManager.Model(&m).Updates(args).Error
+	return mysqlManager.Model(&s).Updates(args).Error
 }
 
-func (m *Users) Delete() error {
+func (s *Submits) Delete() error {
 	mysqlManager := database.GetMysqlClient()
-	err := m.Get()
+	err := s.Get()
 	if err != nil {
 		return err
 	}
-	return mysqlManager.Model(&m).Updates(map[string]interface{}{
+	return mysqlManager.Model(&s).Updates(map[string]interface{}{
 		"IsDeleted": 1,
 	}).Error
 }
 
-func (m *Users) GetAll() ([]Users, error) {
+func (s *Submits) GetAll() ([]Submits, error) {
 	mysqlManager := database.GetMysqlClient()
-	users := []Users{}
-	return users, mysqlManager.Model(&m).Where(m).Where(map[string]interface{}{
+	submits := []Submits{}
+	return submits, mysqlManager.Model(&s).Where(s).Where(map[string]interface{}{
 		"IsDeleted": 0,
-	}).Find(&users).Error
+	}).Find(&submits).Error
 }

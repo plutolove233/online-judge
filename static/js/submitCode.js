@@ -21,31 +21,36 @@ function submitCode() {
     var strCode = $("#codeArea").val();
     strArr = strCode.split("\n");
     len = strArr.length;
-    var flag = false;
-    for (i = 0; i < len; i++)
+    let flag = false;
+    for (i = 0; i < len; i++) {
         if (strArr[i].indexOf("int main()") != -1) {
-            for (j = i; j < len; j++)
-                if (strArr[j].indexOf("return 0") != -1) {
-                    strArr.splice(j, 0, "\tgetchar();");
-                    flag = true;
-                    break;
-                }
-            if (flag) break;
+            let pos = strArr[i].indexOf("int main()");
+            pos += 4;
+            strArr[i] = strArr[i].slice(0, pos) + 'M' + strArr[i].slice(pos + 1);
+            flag = true;
+            break;
         }
-    if (!flag) {
-        alert("没有在主函数内添加return 0");
-    } else {
+    }
+
+    let template = "\nint main(){\n\tMain();\n\tgetchar();\n}";
+
+    if (flag) {
         // ajax
-        SubmitRecordID="100110011001100"
-        console.log(strArr.join("\n"));
-        $(location).attr("href", "../html/submit-result.html?SubmitRecordID="+SubmitRecordID);
+
+        SubmitRecordID = "100110011001100";
+        let code = strArr.join("\n");
+        code += template;
+        console.log(code);
+        $(location).attr("href", "../html/submit-result.html?SubmitRecordID=" + SubmitRecordID);
+    } else {
+        alert("没有main函数入口");
     }
 }
 
-function gotoSubmitRecord(){
+function gotoSubmitRecord() {
     let problemID = $.getUrlParam("ProblemID");
     console.log(problemID);
-    $(location).attr("href", "../html/submit-record.html?ProblemID="+problemID);
+    $(location).attr("href", "../html/submit-record.html?ProblemID=" + problemID);
 }
 
 $(function () {
@@ -74,7 +79,7 @@ $(function () {
         $("#problem-description").append(des);
     }
     inputLayout = inputLayout.split('\n');
-    for (var i = 0; i<inputLayout.length; i++){
+    for (var i = 0; i < inputLayout.length; i++) {
         var inputRequire = $("<p></p>", {
             text: inputLayout[i],
         })
@@ -82,7 +87,7 @@ $(function () {
     }
 
     outputLayout = outputLayout.split('\n');
-    for (var i = 0; i<outputLayout.length; i++){
+    for (var i = 0; i < outputLayout.length; i++) {
         var outputRequire = $("<p></p>", {
             text: outputLayout[i],
         })
@@ -90,7 +95,7 @@ $(function () {
     }
 
     inputExample = inputExample.split('\n');
-    for (var i = 0; i<inputExample.length; i++){
+    for (var i = 0; i < inputExample.length; i++) {
         var inputRequire = $("<p></p>", {
             text: inputExample[i],
         })
@@ -98,7 +103,7 @@ $(function () {
     }
 
     outputExample = outputExample.split('\n');
-    for (var i = 0; i<outputExample.length; i++){
+    for (var i = 0; i < outputExample.length; i++) {
         var outputRequire = $("<p></p>", {
             text: outputExample[i],
         })

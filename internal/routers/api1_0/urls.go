@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang-online-judge/internal/api1_0"
 	"golang-online-judge/internal/routers/api1_0/problems"
+	"golang-online-judge/internal/routers/api1_0/submits"
 	"golang-online-judge/internal/routers/api1_0/users"
 )
 
@@ -23,4 +24,5 @@ func InitAPI1_0Router(engine *gin.Engine) {
 
 	users.InitUsersRouterGroup(api)
 	problems.InitProblemsRouterGroup(api)
+	submits.InitSubmitApiRouterGroup(api)
 }
