@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/vipers"
+	"golangOnlineJudge/internal/globals/vipers"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

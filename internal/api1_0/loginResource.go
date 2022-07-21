@@ -9,17 +9,17 @@ package api1_0
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/responseParser"
-	"golang-online-judge/internal/services"
-	"golang-online-judge/internal/utils/jwt"
 	"golang.org/x/crypto/bcrypt"
+	"golangOnlineJudge/internal/globals/responseParser"
+	"golangOnlineJudge/internal/services"
+	"golangOnlineJudge/internal/utils/jwt"
 )
 
 type UserApi struct {
 }
 
 type loginRequestParser struct {
-	UserName string `json:"UserName" form:"UserName" binding:"reuqired"`
+	UserName string `json:"UserName" form:"UserName" binding:"required"`
 	Password string `json:"Password" form:"Password" binding:"required"`
 }
 

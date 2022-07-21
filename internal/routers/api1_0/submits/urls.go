@@ -9,8 +9,8 @@ package submits
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/api1_0/submits"
-	"golang-online-judge/internal/middlewares"
+	"golangOnlineJudge/internal/api1_0/submits"
+	"golangOnlineJudge/internal/middlewares"
 )
 
 var api *gin.RouterGroup

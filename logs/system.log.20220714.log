@@ -1,0 +1,40 @@
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:13:42"}
+time="2022-07-14T19:13:42+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"globals日志初始化服务完成!","time":"2022-07-14 19:13:43"}
+time="2022-07-14T19:13:43+08:00" level=info msg="globals日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:16:00"}
+time="2022-07-14T19:16:00+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:16:00"}
+time="2022-07-14T19:16:00+08:00" level=info msg="日志初始化服务完成!"
+{"client_ip":"127.0.0.1","latency_time":0,"level":"info","msg":"","req_method":"GET","req_uri":"/api_1_0/version","return_json":"{\"code\":\"2000\",\"message\":\"api.1.0\"}","status_code":200,"time":"2022-07-14 19:16:08"}
+time="2022-07-14T19:16:08+08:00" level=info client_ip=127.0.0.1 latency_time=0s req_method=GET req_uri=/api_1_0/version return_json="{\"code\":\"2000\",\"message\":\"api.1.0\"}" status_code=200
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:20:57"}
+time="2022-07-14T19:20:57+08:00" level=info msg="日志初始化服务完成!"
+{"client_ip":"127.0.0.1","latency_time":0,"level":"info","msg":"","req_method":"GET","req_uri":"/api_1_0/version","return_json":"{\"code\":\"2000\",\"message\":\"api.1.0\"}","status_code":200,"time":"2022-07-14 19:21:06"}
+time="2022-07-14T19:21:06+08:00" level=info client_ip=127.0.0.1 latency_time=0s req_method=GET req_uri=/api_1_0/version return_json="{\"code\":\"2000\",\"message\":\"api.1.0\"}" status_code=200
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:21:53"}
+time="2022-07-14T19:21:53+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:21:53"}
+time="2022-07-14T19:21:53+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:22:43"}
+time="2022-07-14T19:22:43+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:22:43"}
+time="2022-07-14T19:22:43+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:23:42"}
+time="2022-07-14T19:23:42+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:23:42"}
+time="2022-07-14T19:23:42+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:24:12"}
+time="2022-07-14T19:24:12+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:25:49"}
+time="2022-07-14T19:25:49+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:25:49"}
+time="2022-07-14T19:25:49+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:26:07"}
+time="2022-07-14T19:26:07+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:26:07"}
+time="2022-07-14T19:26:07+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:33:10"}
+time="2022-07-14T19:33:10+08:00" level=info msg="日志初始化服务完成!"
+{"level":"info","msg":"日志初始化服务完成!","time":"2022-07-14 19:33:10"}
+time="2022-07-14T19:33:10+08:00" level=info msg="日志初始化服务完成!"

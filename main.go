@@ -4,8 +4,8 @@ import (
 	"encoding/gob"
 	"fmt"
 	"github.com/spf13/viper"
-	"golang-online-judge/internal/settings"
-	"golang-online-judge/internal/utils/logs"
+	"golangOnlineJudge/internal/globals"
+	"golangOnlineJudge/internal/settings"
 	"time"
 )
 
@@ -18,7 +18,7 @@ func main() {
 		fmt.Println("配置文件加载出错！", err)
 		return
 	}
-	var log = logs.GetLogger()
+	var log = globals.GetLogger()
 
 	//初始化数据库（mysql）
 	err = settings.InitDatabase()

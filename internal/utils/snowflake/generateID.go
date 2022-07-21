@@ -9,7 +9,7 @@ package snowflake
 
 import (
 	"github.com/spf13/viper"
-	"golang-online-judge/internal/utils/logs"
+	"golangOnlineJudge/internal/utils/logs"
 	"strconv"
 	"sync"
 )

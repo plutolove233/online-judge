@@ -9,10 +9,10 @@ package users
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/responseParser"
-	"golang-online-judge/internal/services"
-	"golang-online-judge/internal/utils/snowflake"
 	"golang.org/x/crypto/bcrypt"
+	"golangOnlineJudge/internal/globals/responseParser"
+	"golangOnlineJudge/internal/services"
+	"golangOnlineJudge/internal/utils/snowflake"
 )
 
 type UserApi struct {

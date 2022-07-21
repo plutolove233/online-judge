@@ -3,7 +3,7 @@ package vipers
 import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
-	"golang-online-judge/internal/utils/logs"
+	"golangOnlineJudge/internal/utils/logs"
 	"sync"
 )
 

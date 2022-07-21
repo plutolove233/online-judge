@@ -9,7 +9,7 @@ package api1_0
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/codes"
+	"golangOnlineJudge/internal/globals/codes"
 )
 
 func Version(c *gin.Context) {

@@ -9,10 +9,10 @@ package api1_0
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/api1_0"
-	"golang-online-judge/internal/routers/api1_0/problems"
-	"golang-online-judge/internal/routers/api1_0/submits"
-	"golang-online-judge/internal/routers/api1_0/users"
+	"golangOnlineJudge/internal/api1_0"
+	"golangOnlineJudge/internal/routers/api1_0/problems"
+	"golangOnlineJudge/internal/routers/api1_0/submits"
+	"golangOnlineJudge/internal/routers/api1_0/users"
 )
 
 func InitAPI1_0Router(engine *gin.Engine) {

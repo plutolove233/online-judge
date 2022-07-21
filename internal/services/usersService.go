@@ -7,7 +7,7 @@
 */
 package services
 
-import "golang-online-judge/internal/dao"
+import "golangOnlineJudge/internal/dao"
 
 type UsersService struct {
 	dao.Users

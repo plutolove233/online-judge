@@ -9,8 +9,8 @@ package problems
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/api1_0/problems"
-	"golang-online-judge/internal/middlewares"
+	"golangOnlineJudge/internal/api1_0/problems"
+	"golangOnlineJudge/internal/middlewares"
 )
 
 var (

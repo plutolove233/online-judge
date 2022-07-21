@@ -10,7 +10,7 @@ package responseParser
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/codes"
+	"golangOnlineJudge/internal/globals/codes"
 	"net/http"
 )
 

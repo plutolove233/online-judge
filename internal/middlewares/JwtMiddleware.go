@@ -2,10 +2,10 @@ package middlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/codes"
-	"golang-online-judge/internal/models/ginModels"
-	"golang-online-judge/internal/utils/jwt"
-	"golang-online-judge/internal/utils/logs"
+	"golangOnlineJudge/internal/globals/codes"
+	"golangOnlineJudge/internal/models/ginModels"
+	"golangOnlineJudge/internal/utils/jwt"
+	"golangOnlineJudge/internal/utils/logs"
 	"net/http"
 )
 

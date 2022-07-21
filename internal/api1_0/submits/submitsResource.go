@@ -11,12 +11,12 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/codeJudge"
-	"golang-online-judge/internal/globals/responseParser"
-	"golang-online-judge/internal/models/ginModels"
-	"golang-online-judge/internal/services"
-	"golang-online-judge/internal/utils/code"
-	"golang-online-judge/internal/utils/snowflake"
+	"golangOnlineJudge/internal/globals/codeJudge"
+	"golangOnlineJudge/internal/globals/responseParser"
+	"golangOnlineJudge/internal/models/ginModels"
+	"golangOnlineJudge/internal/services"
+	"golangOnlineJudge/internal/utils/code"
+	"golangOnlineJudge/internal/utils/snowflake"
 	"time"
 )
 
@@ -117,16 +117,17 @@ func (u *SubmitApi) JudgeSubmit(c *gin.Context) {
 }
 
 type GetSubmitResponseParser struct {
-	SubmitID		string		`json:"SubmitID"`
-	ProblemID		string		`json:"ProblemID"`
-	SubmitStatus	string		`json:"SubmitStatus"`
-	CreateTime		time.Time	`json:"CreateTime"`
+	SubmitID     string    `json:"SubmitID"`
+	ProblemID    string    `json:"ProblemID"`
+	SubmitStatus string    `json:"SubmitStatus"`
+	CreateTime   time.Time `json:"CreateTime"`
 }
 type GetSubmitRequestParser struct {
-	ProblemID	string	`json:"ProblemID" form:"ProblemID" binding:"required"`
+	ProblemID string `json:"ProblemID" form:"ProblemID" binding:"required"`
 }
+
 func (u *SubmitApi) GetSubmitRecord(c *gin.Context) {
-	temp,_ := c.Get("user")
+	temp, _ := c.Get("user")
 	user := temp.(ginModels.UserModel)
 	parser := GetSubmitRequestParser{}
 	err := c.ShouldBind(&parser)
@@ -147,12 +148,12 @@ func (u *SubmitApi) GetSubmitRecord(c *gin.Context) {
 		return
 	}
 	response := []GetSubmitResponseParser{}
-	for _, submit := range submitList{
+	for _, submit := range submitList {
 		each := GetSubmitResponseParser{
-			ProblemID: submit.ProblemID,
-			SubmitID: submit.SubmitID,
+			ProblemID:    submit.ProblemID,
+			SubmitID:     submit.SubmitID,
 			SubmitStatus: submit.SubmitStatus,
-			CreateTime: submit.CreateTime,
+			CreateTime:   submit.CreateTime,
 		}
 		response = append(response, each)
 	}

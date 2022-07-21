@@ -2,12 +2,12 @@ package settings
 
 import (
 	"github.com/spf13/viper"
-	"golang-online-judge/internal/globals/database"
-	"golang-online-judge/internal/utils/logs"
+	"golangOnlineJudge/internal/globals"
+	"golangOnlineJudge/internal/globals/database"
 )
 
 func InitDatabase() (err error) {
-	var log = logs.GetLogger()
+	var log = globals.GetLogger()
 	if viper.GetBool("system.UseMysql") {
 		err = database.InitMysqlClient()
 		if err != nil {

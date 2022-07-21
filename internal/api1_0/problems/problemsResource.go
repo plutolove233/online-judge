@@ -10,11 +10,11 @@ package problems
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/globals/codes"
-	"golang-online-judge/internal/globals/responseParser"
-	"golang-online-judge/internal/models/ginModels"
-	"golang-online-judge/internal/services"
-	"golang-online-judge/internal/utils/snowflake"
+	"golangOnlineJudge/internal/globals/codes"
+	"golangOnlineJudge/internal/globals/responseParser"
+	"golangOnlineJudge/internal/models/ginModels"
+	"golangOnlineJudge/internal/services"
+	"golangOnlineJudge/internal/utils/snowflake"
 	"os"
 )
 

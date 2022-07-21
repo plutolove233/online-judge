@@ -9,7 +9,7 @@ package users
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-online-judge/internal/api1_0/users"
+	"golangOnlineJudge/internal/api1_0/users"
 )
 
 var (

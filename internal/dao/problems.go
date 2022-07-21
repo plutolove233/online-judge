@@ -8,8 +8,8 @@
 package dao
 
 import (
-	"golang-online-judge/internal/globals/database"
-	"golang-online-judge/internal/models/mysqlModel"
+	"golangOnlineJudge/internal/globals/database"
+	"golangOnlineJudge/internal/models/mysqlModel"
 )
 
 type Problems struct {

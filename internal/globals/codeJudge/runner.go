@@ -10,7 +10,7 @@ package codeJudge
 import (
 	"bytes"
 	"fmt"
-	"golang-online-judge/internal/services"
+	"golangOnlineJudge/internal/services"
 	"io"
 	"io/ioutil"
 	"log"

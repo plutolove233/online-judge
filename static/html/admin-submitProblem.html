@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="CH-ZN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../js/admin-submitProblem.js"></script>
+    <title>上传问题</title>
+</head>
+
+<body>
+    <form id="problemDescriptionForm">
+        <input name="Title" type="text" placeholder="问题题目">
+        <input name="Content" type="text" placeholder="问题描述">
+        <textarea name="InputLayout" type="text" placeholder="输入描述"></textarea>
+        <input name="OutputLayout" type="text" placeholder="输出描述">
+        <input name="TimeLimit" type="number" placeholder="时间限制">
+        <input name="MemoryLimit"  type="number" placeholder="空间限制">
+        <button type="button" onclick="newProblem()">提交</button>
+    </form>
+</body>
+
+</html>
