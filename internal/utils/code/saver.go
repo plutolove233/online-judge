@@ -15,7 +15,7 @@ import (
 func SaveCodeContext(code string, userID string, submitID string) (string, error) {
 	dirName := "./codeArea/" + userID
 	path := fmt.Sprintf("%s/%s.cpp", dirName, submitID)
-	err := os.Mkdir(dirName, 0777)
+	err := os.MkdirAll(dirName, 0777)
 	if err != nil {
 		return "", err
 	}

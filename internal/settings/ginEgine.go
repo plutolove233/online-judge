@@ -12,6 +12,10 @@ import (
 func InitGinEngine() (*gin.Engine, error) {
 	gin.SetMode(viper.GetString("system.Mode"))
 	engine := gin.Default()
+	err := engine.SetTrustedProxies(nil)
+	if err != nil {
+		return engine, err
+	}
 	// 加载全局中间件
 	engine.Use(middlewares.CorsMiddleware())
 	engine.Use(middlewares.LogMiddleware())

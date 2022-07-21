@@ -17,7 +17,7 @@ import (
 
 func InitAPI1_0Router(engine *gin.Engine) {
 	api := engine.Group("api_1_0")
-	api.Any("version", api1_0.Version)
+	api.GET("version", api1_0.Version)
 	userApi := api1_0.UserApi{}
 	api.POST("login", userApi.Login)
 	api.POST("refreshToken", userApi.RefreshToken)

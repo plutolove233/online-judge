@@ -51,11 +51,10 @@ type RunnerParser struct {
 	Message string //程序运行信息
 }
 
-func (runner *RunnerParser) CodeJudge(path string, problemID string) {
+func (runner *RunnerParser) CodeJudge(path string, problemID string, submitID string) {
 	passCount := 0
 	var lock sync.Mutex
 	var err1 error
-	var message string
 	var allocate uint64
 	var cost time.Duration
 
@@ -66,8 +65,8 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 		return
 	}
 
-	codename := fmt.Sprintf("%s/%s.cpp", path, problemID)
-	outPATH := fmt.Sprintf("%s/%s", path, problemID)
+	codename := fmt.Sprintf("%s/%s.cpp", path, submitID)
+	outPATH := fmt.Sprintf("%s/%s", path, submitID)
 	cmd := exec.Command("gcc", codename, "-o", outPATH)
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr
@@ -83,7 +82,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 	RE := make(chan int)  // 运行时错误的channel
 	TLE := make(chan int) // 超时间的channel
 
-	for i := 1; i <= problem.TestNum; i++ {
+	for i := 0; i < problem.TestNum; i++ {
 		inputPath := fmt.Sprintf("./problems/%s/%d.in", problemID, i)
 		outputPath := fmt.Sprintf("./problems/%s/%d.out", problemID, i)
 		input, err1 := ioutil.ReadFile(inputPath)
@@ -98,7 +97,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 			runner.Message = err1.Error()
 			return
 		}
-		go func(i int) {
+		go func(i int, input []byte, output []byte) {
 			cmd := exec.Command(outPATH)
 			var out, stderr bytes.Buffer
 			cmd.Stderr = &stderr
@@ -111,14 +110,14 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 
 			startTime := time.Now()
 			if err = cmd.Start(); err != nil {
-				message = fmt.Sprintf("%s:%s", err.Error(), stderr.String())
+				runner.Message = fmt.Sprintf("%s:%s", err.Error(), stderr.String())
 				RE <- 1 // 运行时错误
 				return
 			}
 			pid := cmd.Process.Pid
 			msg, err2 := runTaskList(pid)
 			if err2 != nil {
-				message = msg
+				runner.Message = msg
 				RE <- 1
 				return
 			}
@@ -127,8 +126,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 			io.WriteString(stdinPipe, "a\n") // 输入a表示进程结束
 
 			if err = cmd.Wait(); err != nil {
-				runner.Status = 0
-				message = fmt.Sprintf("%s:%s", err.Error(), stderr.String())
+				runner.Message = fmt.Sprintf("%s:%s", err.Error(), stderr.String())
 				RE <- 1
 				return
 			}
@@ -158,7 +156,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 			}
 			lock.Unlock()
 
-		}(i)
+		}(i, input, output)
 	}
 	runner.Status = 0
 	select {
@@ -175,7 +173,6 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string) {
 		runner.Message = fmt.Sprintf("memory limit error, allocate %dKb", allocate)
 	case <-RE:
 		runner.Status = 6
-		runner.Message = message
 	case <-AC:
 		runner.Status = 1
 	}

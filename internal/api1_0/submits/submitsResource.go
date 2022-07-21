@@ -93,7 +93,7 @@ func (u *SubmitApi) JudgeSubmit(c *gin.Context) {
 	}
 	path := fmt.Sprintf("./codeArea/%s", user.UserID)
 	runner := &codeJudge.RunnerParser{}
-	runner.CodeJudge(path, parser.SubmitID)
+	runner.CodeJudge(path, submit.ProblemID, parser.SubmitID)
 	if runner.Status == 0 { //处理系统错误
 		err = errors.New(runner.Message)
 		responseParser.JsonInternalError(c, "判定程序出错", err)
@@ -132,7 +132,7 @@ func (u *SubmitApi) GetSubmitRecord(c *gin.Context) {
 	parser := GetSubmitRequestParser{}
 	err := c.ShouldBind(&parser)
 	if err != nil {
-		responseParser.JsonParameterIllegal(c, "获取请求参数失败", nil)
+		responseParser.JsonParameterIllegal(c, "获取请求参数失败", err)
 		return
 	}
 	submitService := services.SubmitsService{}

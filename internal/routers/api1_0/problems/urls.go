@@ -20,6 +20,9 @@ var (
 func InitProblemsRouterGroup(engine *gin.RouterGroup) {
 	api = engine.Group("problems")
 	problemApi := problems.ProblemApi{}
+
+	api.GET("description", problemApi.GetProblemDescription)
+
 	api.Use(middlewares.TokenRequire())
 	api.POST("createProblem", middlewares.AuthenticationMiddleware(), problemApi.UploadNewProblem)
 	api.POST("uploadTestCases", middlewares.AuthenticationMiddleware(), problemApi.UploadProblemTestCases)
