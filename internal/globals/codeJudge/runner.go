@@ -123,7 +123,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string, submitID st
 			}
 			allocate = calcMemory(msg)
 
-			io.WriteString(stdinPipe, "a\n") // 输入a表示进程结束
+			io.WriteString(stdinPipe, "~\n") // 输入a表示进程结束
 
 			if err = cmd.Wait(); err != nil {
 				runner.Message = fmt.Sprintf("%s:%s", err.Error(), stderr.String())
@@ -133,6 +133,7 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string, submitID st
 			cost = time.Since(startTime)
 			// 答案错误
 			if string(output) != out.String() {
+				runner.Message = fmt.Sprintf("except is: %s; read is: %s", output, out.String())
 				WA <- 1
 				return
 			}
@@ -163,7 +164,6 @@ func (runner *RunnerParser) CodeJudge(path string, problemID string, submitID st
 	case <-WA:
 		//msg = "答案错误"
 		runner.Status = 2
-		runner.Message = fmt.Sprintf("Wrong Answer,passed:%d", passCount)
 	case <-TLE:
 		runner.Status = 3
 		runner.Message = "time limit error"

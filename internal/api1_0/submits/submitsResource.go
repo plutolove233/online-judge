@@ -17,6 +17,7 @@ import (
 	"golangOnlineJudge/internal/services"
 	"golangOnlineJudge/internal/utils/code"
 	"golangOnlineJudge/internal/utils/snowflake"
+	"io/ioutil"
 	"time"
 )
 
@@ -159,5 +160,59 @@ func (u *SubmitApi) GetSubmitRecord(c *gin.Context) {
 	}
 
 	responseParser.JsonOK(c, "获取提交列表成功", response)
+	return
+}
+
+type GetSubmitCodeParser struct {
+	SubmitID string `json:"SubmitID" form:"SubmitID" binding:"required"`
+}
+
+func (u *SubmitApi) GetSubmitCode(c *gin.Context) {
+	parser := GetSubmitCodeParser{}
+	err := c.ShouldBind(&parser)
+	if err != nil {
+		responseParser.JsonParameterIllegal(c, "获取提交id失败", err)
+		return
+	}
+
+	temp, _ := c.Get("user")
+	user := temp.(ginModels.UserModel)
+
+	submitService := services.SubmitsService{}
+	submitService.SubmitID = parser.SubmitID
+	if err = submitService.Get(); err != nil {
+		if err.Error() == "record not found" {
+			responseParser.JsonNotData(c, "提交数据不存在", err)
+			return
+		}
+		responseParser.JsonDBError(c, "数据库错误", err)
+		return
+	}
+
+	problemService := services.ProblemsService{}
+	problemService.ProblemID = submitService.ProblemID
+	if err = problemService.Get(); err != nil {
+		if err.Error() == "record not found" {
+			responseParser.JsonNotData(c, "提交对应的问题数据不存在", err)
+			return
+		}
+		responseParser.JsonDBError(c, "数据库错误", err)
+		return
+	}
+
+	path := fmt.Sprintf("./codeArea/%s/%s.cpp", user.UserID, parser.SubmitID)
+	codeContext, err := ioutil.ReadFile(path)
+	if err != nil {
+		responseParser.JsonInternalError(c, "读取代码文件错误", err)
+		return
+	}
+
+	responseParser.JsonOK(c, "获取代码成功", map[string]interface{}{
+		"SubmitID":     parser.SubmitID,
+		"Title":        problemService.Title,
+		"UserID":       user.UserID,
+		"SubmitStatus": submitService.SubmitStatus,
+		"Code":         string(codeContext),
+	})
 	return
 }

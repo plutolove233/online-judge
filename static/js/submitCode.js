@@ -18,7 +18,9 @@ function keyUp() {
 }
 
 function submitCode() {
+    let problemID = $.getUrlParam("ProblemID");
     var strCode = $("#codeArea").val();
+    strCode = "#include <cstdio>\n" + strCode;
     strArr = strCode.split("\n");
     len = strArr.length;
     let flag = false;
@@ -32,16 +34,40 @@ function submitCode() {
         }
     }
 
-    let template = "\nint main(){\n\tMain();\n\tgetchar();\n}";
+    let template = "\nint main(){\n\tMain();\n\tchar STOP_CONTROLLER;\n\twhile(STOP_CONTROLLER!='~'){\n\t\tSTOP_CONTROLLER=getchar();\n\t}\n}";
 
     if (flag) {
-        // ajax
-
-        SubmitRecordID = "100110011001100";
         let code = strArr.join("\n");
         code += template;
         console.log(code);
-        $(location).attr("href", "../html/submit-result.html?SubmitRecordID=" + SubmitRecordID);
+        let request = {
+            "ProblemID": problemID,
+            "CodeContext": code,
+        };
+        let dataJson = JSON.stringify(request);
+        // ajax
+        $.ajax({
+            headers:{
+                "token": localStorage.getItem("token"),
+            },
+            url: 'http://localhost:8000/api_1_0/submit/submit',
+            type: 'POST',
+            data: dataJson, //form-data or json
+            contentType: 'application/json', //application/json or form-data
+            async: true,
+            success: function (res) {
+                console.log(res);
+                if (res.code != "2000") {
+                    alert("代码提交失败，错误信息为：\n" + res['message']);
+                } else {
+                    let SubmitRecordID = res['data'];
+                    $(location).attr("href", "../html/submit-result.html?SubmitID=" + SubmitRecordID);
+                }
+            },
+            error: function (param) {
+                console.log(param);
+            },
+        })
     } else {
         alert("没有main函数入口");
     }
@@ -54,59 +80,75 @@ function gotoSubmitRecord() {
 }
 
 $(function () {
-    var proTitle = "A+B problem"
-    var timeLimit = "1000";
-    var memoryLimit = "256";
-    var content = "输入A，B\n输出A+B";
-    var inputLayout = "多行输出\n每组输入包含两个整数A,B，用一个空格分隔";
-    var outputLayout = "多行输出\n每行输出一个整数，表示A+B";
-    var inputExample = "5 8\n1 2";
-    var outputExample = "13\n3";
+    let problemID = $.getUrlParam("ProblemID");
+    $.ajax({
+        url: 'http://localhost:8000/api_1_0/problems/description?ProblemID=' + problemID,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success: function (res) {
+            if (res.code != "2000") {
+                console.log(res);
+                alert("获取题目信息失败，错误信息为：\n" + res.message);
+            } else {
+                let info = res['data'];
+                $("#problem-title").text(info.Title);
+                var tle = $("<p></p>", {
+                    text: "Time limit:" + info.TimeLimit + "ms",
+                })
+                var mle = $("<p></p>", {
+                    text: "Memory limit: " + info.MemoryLimit + "Mb",
+                })
+                $("#problem-description").append(tle, mle);
+                let content = info.Content;
+                content = content.split("\n");
+                for (var i = 0; i < content.length; i++) {
+                    var des = $("<p></p>", {
+                        text: content[i],
+                    })
+                    $("#problem-description").append(des);
+                }
+                let inputLayout = info.InputLayout;
+                inputLayout = inputLayout.split('\n');
+                for (var i = 0; i < inputLayout.length; i++) {
+                    var inputRequire = $("<p></p>", {
+                        text: inputLayout[i],
+                    })
+                    $("#input-description").append(inputRequire);
+                }
 
-    $("#problem-title").text(proTitle);
-    var tle = $("<p></p>", {
-        text: "Time limit:" + timeLimit + "ms",
+                let outputLayout = info.OutputLayout;
+                outputLayout = outputLayout.split('\n');
+                for (var i = 0; i < outputLayout.length; i++) {
+                    var outputRequire = $("<p></p>", {
+                        text: outputLayout[i],
+                    })
+                    $("#output-description").append(outputRequire);
+                }
+
+                let inputExample = info.ExampleIn;
+                inputExample = inputExample.split('\n');
+                for (var i = 0; i < inputExample.length; i++) {
+                    var inputRequire = $("<p></p>", {
+                        text: inputExample[i],
+                    })
+                    $("#input-example").append(inputRequire);
+                }
+
+                let outputExample = info.ExampleOut;
+                outputExample = outputExample.split('\n');
+                for (var i = 0; i < outputExample.length; i++) {
+                    var outputRequire = $("<p></p>", {
+                        text: outputExample[i],
+                    })
+                    $("#output-example").append(outputRequire);
+                }
+            }
+        },
+        error: function (param) {
+            console.log(param);
+        },
     })
-    var mle = $("<p></p>", {
-        text: "Memory limit: " + memoryLimit + "Mb",
-    })
-    $("#problem-description").append(tle, mle);
-    content = content.split("\n");
-    for (var i = 0; i < content.length; i++) {
-        var des = $("<p></p>", {
-            text: content[i],
-        })
-        $("#problem-description").append(des);
-    }
-    inputLayout = inputLayout.split('\n');
-    for (var i = 0; i < inputLayout.length; i++) {
-        var inputRequire = $("<p></p>", {
-            text: inputLayout[i],
-        })
-        $("#input-description").append(inputRequire);
-    }
 
-    outputLayout = outputLayout.split('\n');
-    for (var i = 0; i < outputLayout.length; i++) {
-        var outputRequire = $("<p></p>", {
-            text: outputLayout[i],
-        })
-        $("#output-description").append(outputRequire);
-    }
 
-    inputExample = inputExample.split('\n');
-    for (var i = 0; i < inputExample.length; i++) {
-        var inputRequire = $("<p></p>", {
-            text: inputExample[i],
-        })
-        $("#input-example").append(inputRequire);
-    }
-
-    outputExample = outputExample.split('\n');
-    for (var i = 0; i < outputExample.length; i++) {
-        var outputRequire = $("<p></p>", {
-            text: outputExample[i],
-        })
-        $("#output-example").append(outputRequire);
-    }
 })

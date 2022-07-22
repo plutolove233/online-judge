@@ -22,4 +22,5 @@ func InitSubmitApiRouterGroup(engine *gin.RouterGroup) {
 	api.POST("submit", submitApi.SubmitProblems)
 	api.GET("judge", submitApi.JudgeSubmit)
 	api.GET("list", submitApi.GetSubmitRecord)
+	api.GET("showCode", submitApi.GetSubmitCode)
 }

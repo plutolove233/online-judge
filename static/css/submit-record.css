@@ -4,7 +4,8 @@ table {
     font-family: 'Courier New', Courier, monospace;
 }
 
-th,td {
+th,
+td {
 
     border: 2px solid rgb(222, 226, 230);
     /*为单元格单独设置边框*/
@@ -27,7 +28,7 @@ tr:nth-child(even) {
 }
 
 .two {
-    width: 100px;
+    width: 200px;
     height: 45px;
 }
 
@@ -46,7 +47,7 @@ tr:nth-child(even) {
 }
 
 .four {
-    width: 300px;
+    width: 600px;
     height: 45px;
 }
 

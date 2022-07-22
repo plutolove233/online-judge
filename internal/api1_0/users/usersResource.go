@@ -22,6 +22,7 @@ type RegisterRequestParser struct {
 	UserName string `json:"UserName" form:"UserName" binding:"required"`
 	Password string `json:"Password" form:"Password" binding:"required"`
 	Email    string `json:"Email" form:"Email" binding:"required"`
+	IsAdmin  bool   `json:"IsAdmin" form:"IsAdmin" binding:"required"`
 }
 
 func (u *UserApi) Register(c *gin.Context) {
